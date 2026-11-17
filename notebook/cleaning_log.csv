@@ -1,0 +1,29 @@
+table,issue,action,rows_affected
+orders,dates stored as text,converted 5 columns to datetime,99441
+orders,sparse months outside Jan 2017 - Aug 2018,flagged in_scope = False,349
+orders,canceled / unavailable orders,flagged is_excluded = True (not counted as revenue),1234
+orders,delivered orders with no delivery date,flagged missing_delivery_date = True,8
+orders,delivered before carrier pickup date,flagged carrier_date_after_delivery = True (kept),23
+orders,extreme delivery times (over 60 days),flagged extreme_delivery = True (kept),304
+"customers, sellers, geolocation",ZIP prefix stored as number (leading zeros lost),converted to 5-character text,270755
+customers,city and state text,"checked, already consistent, no change needed",0
+geolocation,exact duplicate rows,dropped,261831
+geolocation,coordinates outside Brazil,dropped rows,33
+geolocation,city names with accents,converted to lowercase without accents,63434
+geolocation,many coordinate rows per ZIP prefix (up to 779),"collapsed to one row per ZIP (median coordinates, most common city and state)",719289
+order_items,shipping limit date stored as text,converted to datetime,112650
+orders,orders with no items (mostly canceled / unavailable),flagged has_items = False (no revenue),775
+payments,zero-value payments (voucher and not_defined),flagged is_zero_payment = True (kept),9
+payments,installments = 0,flagged invalid_installments = True (kept),2
+payments,payment total differs from items price + freight by more than 1,"flagged payment_mismatch = True (revenue is based on item price, not payments)",249
+orders,order with no payment record,flagged has_payment = False (kept),1
+reviews,dates stored as text,converted to datetime,99224
+reviews,orders with more than one review (547 orders),kept the most recent review per order,551
+reviews,comment text is mostly blank,added has_comment flag (comments not used in KPIs),57898
+products,misspelled column names ('lenght'),renamed to 'length',0
+products,2 categories missing from translation table,added the English names manually,2
+products,typos in English category names,corrected spelling,4
+products,products with no category,labeled 'Unknown',610
+products,weight = 0,flagged invalid_weight = True (weight not used in KPIs),4
+sellers,"city field with accents, state suffixes, extra text or a ZIP code",standardized to a lowercase city name (ZIP-only value replaced using the seller's ZIP),18
+sellers,"city field with extra text, state codes, abbreviations or an email",kept the city name only; non-city values replaced using the seller's ZIP,16
