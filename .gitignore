@@ -1,0 +1,27 @@
+# Raw Olist data (download from Kaggle, not stored in this repo)
+olist_*_dataset.csv
+product_category_name_translation.csv
+olist_clean/
+sales_items.csv
+
+# Archives
+*.zip
+*.7z
+*.rar
+
+# Excel / Office temp files
+~$*
+*.tmp
+
+# Power BI
+*.pbix.bak
+.pbi/
+
+# Python / Jupyter
+.ipynb_checkpoints/
+__pycache__/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
